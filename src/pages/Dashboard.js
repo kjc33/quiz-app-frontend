@@ -1,7 +1,11 @@
 import React from 'react'
+import CreatePost from './CreatePost'
 
 export default function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div>
+        <h1>Dashboard</h1>
+        <CreatePost />
+    </div>
   )
 }

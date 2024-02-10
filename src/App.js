@@ -2,26 +2,19 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
-// import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import NavigationBar from './components/NavigationBar'
+import Logout from './components/NavigationBar'
 
-const Dashboard = () => {
-    return (
-        <div>Dashboard</div>
-    )
-}
+import Posts from './pages/Posts'
+import NotFound from './pages/NotFound'
 
 export default function App() {
     return (
         <div>
             <Router>
-                <nav>
-                    <ul>
-                        <li><Link to="/register">Register</Link></li>
-                        <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/dashboard">Dashboard</Link></li>
-                    </ul>
-                </nav>
+                <NavigationBar />
                 <Routes>
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
@@ -31,7 +24,9 @@ export default function App() {
                         </ProtectedRoute>
                     } />
 
-                    <Route path="*" element={<Login />} />
+                    <Route path="/" element={<Posts />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
         </div>
