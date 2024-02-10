@@ -8,7 +8,7 @@ export default function CreatePost() {
 
     const navigate = useNavigate()
 
-    const { isAuthenticated, isLoading } = useAuth()
+    const { isAuthenticated } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
