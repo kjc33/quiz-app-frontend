@@ -38,9 +38,3 @@ export const resultInitalState = {
   correctAnswers: 0,
   wrongAnswers: 0,
 };
-
-export const resultInitialState = {
-  score: 0,
-  correctAnswer: 0,
-  wrongAnswers: 0,
-};

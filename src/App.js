@@ -9,7 +9,7 @@ import Logout from "./components/NavigationBar";
 import Quiz from "./components/Quiz";
 import { jsQuiz } from "./constants";
 
-import "./index.scss";
+import "./styles/index.scss";
 import Posts from "./pages/Posts";
 import NotFound from "./pages/NotFound";
 

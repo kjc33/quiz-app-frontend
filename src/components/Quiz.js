@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { resultInitialState } from "../constants";
+import { resultInitalState } from "../constants";
+import "./Quiz.scss";
 
 const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -8,7 +9,7 @@ const Quiz = ({ questions }) => {
   const [result, setResult] = useState({
     score: 0,
     correctAnswer: 0,
-    wrongAnswers: 0
+    wrongAnswers: 0,
   });
   const [showResult, setShowResult] = useState(false);
 
@@ -25,18 +26,15 @@ const Quiz = ({ questions }) => {
 
   const onClickNext = () => {
     setAnswerIndex(null);
-    setResult((prev) =>
-      answer
-        ? {
-            ...prev,
-            score: prev.score + 5,
-            correctAnswer: prev.correctAnswer + 1,
-          }
-        : {
-            ...prev,
-            wrongAnswers: prev.wrongAnswers + 1,
-          }
-    );
+
+    const isCorrectAnswer = answer === true;
+
+    setResult((prev) => ({
+      ...prev,
+      score: isCorrectAnswer ? prev.score + 20 : prev.score,
+      correctAnswer: isCorrectAnswer ? prev.correctAnswer + 1 : prev.correctAnswer,
+      wrongAnswers: isCorrectAnswer ? prev.wrongAnswers : prev.wrongAnswers + 1,
+    }));
 
     if (currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
@@ -44,6 +42,12 @@ const Quiz = ({ questions }) => {
       setCurrentQuestion(0);
       setShowResult(true);
     }
+  };
+
+  const onTryAgain = () => {
+    setResult(resultInitalState);
+    setAnswer(null);
+    setShowResult(false);
   };
 
   return (
@@ -75,6 +79,19 @@ const Quiz = ({ questions }) => {
       ) : (
         <div className="result">
           <h3>Results</h3>
+          <p>
+            Number of Questions: <span>{questions.length}</span>
+          </p>
+          <p>
+            Correct Answers: <span>{result.correctAnswer}</span>
+          </p>
+          <p>
+            Wrong Answers: <span>{result.wrongAnswers}</span>
+          </p>
+          <p>
+            Total Score: <span>{result.score}</span>
+          </p>
+          <button onClick={onTryAgain}>Try Again</button>
         </div>
       )}
     </div>

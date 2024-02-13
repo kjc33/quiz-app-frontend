@@ -1,26 +1,4 @@
-$primary: #150080;
-$accent: #d08642;
-$bg: #ffffff;
-$bg-accent: #e7e8e9;
-$disabled: #9c9c9c;
-$foreground: #2d264b;
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    font-family: monospace;
-    background: linear-gradient(0deg, $primary 0.03%, $accent);
-    color: $foreground;
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 0 30px;
-    height: 100vh;
-}
+@import "../styles/vars.scss";
 
 .quiz-container {
     width: 500px;
@@ -89,6 +67,26 @@ body {
             background: $bg-accent;
             color: $disabled;
             cursor: not-allowed;
+        }
+    }
+    
+    .result {
+        text-align: center;
+
+        h3 {
+            font-size: 1.5rem;
+            letter-spacing: 1.4px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: 500;
+        
+           span {
+                color: $primary;
+                font-size: 1.5rem;
+            }
         }
     }
 }
