@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavigationBar from "./components/NavigationBar";
 import Logout from "./components/NavigationBar";
-import Quiz from "./components/Quiz";
+import Quiz from "./components/Quiz/Quiz";
 import { jsQuiz } from "./constants";
 
 import "./styles/index.scss";

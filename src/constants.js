@@ -35,6 +35,6 @@ export const jsQuiz = {
 
 export const resultInitalState = {
   score: 0,
-  correctAnswers: 0,
+  correctAnswer: 0,
   wrongAnswers: 0,
 };

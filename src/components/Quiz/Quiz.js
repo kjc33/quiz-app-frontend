@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { resultInitalState } from "../constants";
+import React, { useState, useEffect } from "react";
+import { resultInitalState } from "../../constants";
+import AnswerTimer from "../AnswerTimer/AnswerTimer";
+
 import "./Quiz.scss";
 
 const Quiz = ({ questions }) => {
@@ -12,6 +14,13 @@ const Quiz = ({ questions }) => {
     wrongAnswers: 0,
   });
   const [showResult, setShowResult] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
+
+  useEffect(() => {
+    if (!showResult) {
+      setResult(resultInitalState);
+    }
+  }, [showResult]);
 
   const { question, choices, correctAnswer } = questions[currentQuestion];
 
@@ -25,22 +34,29 @@ const Quiz = ({ questions }) => {
   };
 
   const onClickNext = () => {
-    setAnswerIndex(null);
+    if (answer !== null) {
+      setAnswerIndex(null);
 
-    const isCorrectAnswer = answer === true;
+      const isCorrectAnswer = answer === true;
 
-    setResult((prev) => ({
-      ...prev,
-      score: isCorrectAnswer ? prev.score + 20 : prev.score,
-      correctAnswer: isCorrectAnswer ? prev.correctAnswer + 1 : prev.correctAnswer,
-      wrongAnswers: isCorrectAnswer ? prev.wrongAnswers : prev.wrongAnswers + 1,
-    }));
+      setResult((prev) => ({
+        ...prev,
+        score: isCorrectAnswer ? prev.score + 20 : prev.score,
+        correctAnswer: isCorrectAnswer ? prev.correctAnswer + 1 : prev.correctAnswer,
+        wrongAnswers: isCorrectAnswer ? prev.wrongAnswers : prev.wrongAnswers + 1,
+      }));
 
-    if (currentQuestion !== questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
+      if (currentQuestion !== questions.length - 1) {
+        setCurrentQuestion((prev) => prev + 1);
+      } else {
+        setCurrentQuestion(0);
+        setShowResult(true);
+      }
     } else {
-      setCurrentQuestion(0);
-      setShowResult(true);
+      setWarningMessage("Please select an answer before proceeding to the next question.");
+      setTimeout(() => {
+        setWarningMessage("");
+      }, 3000);
     }
   };
 
@@ -52,8 +68,10 @@ const Quiz = ({ questions }) => {
 
   return (
     <div className="quiz-container">
+      {warningMessage && <p className="warning-message">{warningMessage}</p>}
       {!showResult ? (
         <>
+        <AnswerTimer />
           <div className="pagination">
             <span className="active-question-number">{currentQuestion + 1}</span>
             <span className="total-questions">/{questions.length}</span>
