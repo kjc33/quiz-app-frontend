@@ -54,7 +54,7 @@
     }
 
     button {
-        background: linear-gradient(0deg, $primary 0.03%, $accent);
+        background: $primary;
         border-radius: 9px;
         font-size: 1.125rem;
         color: $bg;
@@ -65,8 +65,8 @@
         cursor: pointer;
 
         &:disabled {
-            background: $bg-accent;
-            color: $disabled;
+            background: $disabled;
+            color: $bg;
             cursor: not-allowed;
         }
     }
@@ -83,6 +83,7 @@
         p {
             font-size: 1rem;
             font-weight: 500;
+            color: $body;
         
            span {
                 color: $primary;

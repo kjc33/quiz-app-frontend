@@ -14,7 +14,7 @@ const Quiz = ({ questions }) => {
     wrongAnswers: 0,
   });
   const [showResult, setShowResult] = useState(false);
-  const [warningMessage, setWarningMessage] = useState("");
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     if (!showResult) {
@@ -22,7 +22,7 @@ const Quiz = ({ questions }) => {
     }
   }, [showResult]);
 
-  const { question, choices, correctAnswer } = questions[currentQuestion];
+  const { question, choices, correctAnswer, type } = questions[currentQuestion];
 
   const onAnswerClick = (answer, index) => {
     setAnswerIndex(index);
@@ -48,15 +48,11 @@ const Quiz = ({ questions }) => {
 
       if (currentQuestion !== questions.length - 1) {
         setCurrentQuestion((prev) => prev + 1);
+        setKey((prevKey) => prevKey + 1);
       } else {
         setCurrentQuestion(0);
         setShowResult(true);
       }
-    } else {
-      setWarningMessage("Please select an answer before proceeding to the next question.");
-      setTimeout(() => {
-        setWarningMessage("");
-      }, 3000);
     }
   };
 
@@ -66,12 +62,32 @@ const Quiz = ({ questions }) => {
     setShowResult(false);
   };
 
+  const handleTimeExpire = () => {
+    setAnswer(false);
+    onClickNext();
+  };
+
+  const getAnswerUI = () => {
+    if (type === "FIB") {
+      return <input />;
+    }
+
+    return (
+      <ul>
+        {choices.map((answer, index) => (
+          <li onClick={() => onAnswerClick(answer, index)} key={answer} className={answerIndex === index ? "selected-answer" : null}>
+            {answer}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="quiz-container">
-      {warningMessage && <p className="warning-message">{warningMessage}</p>}
       {!showResult ? (
         <>
-        <AnswerTimer />
+          <AnswerTimer key={key} duration={10} timeExpire={handleTimeExpire} />
           <div className="pagination">
             <span className="active-question-number">{currentQuestion + 1}</span>
             <span className="total-questions">/{questions.length}</span>
@@ -80,13 +96,7 @@ const Quiz = ({ questions }) => {
             <h2>{question}</h2>
           </div>
           <div className="choices">
-            <ul>
-              {choices.map((answer, index) => (
-                <li onClick={() => onAnswerClick(answer, index)} key={answer} className={answerIndex === index ? "selected-answer" : null}>
-                  {answer}
-                </li>
-              ))}
-            </ul>
+            {getAnswerUI(type)}
             <div className="quiz-footer">
               <button onClick={onClickNext} disabled={answerIndex === null}>
                 {currentQuestion === questions.length - 1 ? "Submit" : "Next"}

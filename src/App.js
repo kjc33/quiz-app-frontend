@@ -10,12 +10,11 @@ import Quiz from "./components/Quiz/Quiz";
 import { jsQuiz } from "./constants";
 
 import "./styles/index.scss";
-import Posts from "./pages/Posts";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
-    <div>
+    <>
       <Router>
         <NavigationBar />
         <Routes>
@@ -31,11 +30,10 @@ export default function App() {
             }
           />
 
-          <Route path="/" element={<Posts />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </div>
+    </>
   );
 }

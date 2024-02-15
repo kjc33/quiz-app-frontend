@@ -8,11 +8,32 @@
 
 body {
   font-family: monospace;
-  background: linear-gradient(0deg, $primary 0.03%, $accent);
+  background: $primary;
   color: $foreground;
   display: flex;
   justify-content: center;
   margin: 0 auto;
   padding: 0 30px;
   height: 100vh;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  height: 90px;
+
+  & ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  & a {
+    color: $bg;
+  }
+}
+
+h1 {
+  color: $bg;
 }
