@@ -8,6 +8,7 @@ const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [inputAnswer, setInputAnswer] = useState();
   const [result, setResult] = useState({
     score: 0,
     correctAnswer: 0,
@@ -67,9 +68,21 @@ const Quiz = ({ questions }) => {
     onClickNext();
   };
 
+  const handleInputChange = (evt) => {
+    setInputAnswer(evt.target.value);
+
+    if (evt.target.value === correctAnswer) {
+      setAnswer(true);
+    } else {
+      setAnswer(false);
+    }
+  }
+
   const getAnswerUI = () => {
+    if (!choices) return null;
+    
     if (type === "FIB") {
-      return <input />;
+      return <input value={inputAnswer} onChange={handleInputChange} />;
     }
 
     return (
@@ -87,7 +100,7 @@ const Quiz = ({ questions }) => {
     <div className="quiz-container">
       {!showResult ? (
         <>
-          <AnswerTimer key={key} duration={10} timeExpire={handleTimeExpire} />
+          <AnswerTimer key={key} duration={15} timeExpire={handleTimeExpire} />
           <div className="pagination">
             <span className="active-question-number">{currentQuestion + 1}</span>
             <span className="total-questions">/{questions.length}</span>
@@ -98,7 +111,7 @@ const Quiz = ({ questions }) => {
           <div className="choices">
             {getAnswerUI(type)}
             <div className="quiz-footer">
-              <button onClick={onClickNext} disabled={answerIndex === null}>
+              <button onClick={onClickNext} disabled={answerIndex === null && !inputAnswer}>
                 {currentQuestion === questions.length - 1 ? "Submit" : "Next"}
               </button>
             </div>

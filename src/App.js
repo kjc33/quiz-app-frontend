@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -7,12 +7,27 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NavigationBar from "./components/NavigationBar";
 import Logout from "./components/NavigationBar";
 import Quiz from "./components/Quiz/Quiz";
-import { jsQuiz } from "./constants";
 
 import "./styles/index.scss";
 import NotFound from "./pages/NotFound";
 
-export default function App() {
+function App() {
+  const [questions, setQuestions] = useState([]);
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  const getQuestions = async () => {
+    try {
+      const response = await fetch("https://quiz-app-backend-32v6.onrender.com/api/questions");
+      const questionsResponse = await response.json();
+      console.log(questionsResponse);
+      setQuestions(questionsResponse);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <Router>
@@ -25,7 +40,7 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
-                <Quiz questions={jsQuiz.questions} />
+                {questions.length && <Quiz questions={questions} />}
               </ProtectedRoute>
             }
           />
@@ -37,3 +52,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;
