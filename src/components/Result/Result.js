@@ -1,20 +1,27 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Result.scss";
 
-const Result = ({ totalQuestions, result, onTryAgain }) => {
+const Result = ({ totalQuestions, result, onTryAgain, onSubmit }) => {
   const [name, setName] = useState("");
   const [highScores, setHighScores] = useState([]);
   const [showScores, setShowScores] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSave = () => {
-    const score = {
-      name,
-      score: result.score,
-    };
+  useEffect(() => {
+    if (showScores) {
+      navigate("/");
+    }
+  }, [showScores, navigate]);
 
-    const newHighScores = [...highScores, score].sort((a, b) => b.score - a.score);
-    setHighScores(newHighScores);
-    setShowScores(true);
+  const handleSave = async () => {
+    try {
+      await onSubmit(name, result.score);
+      setHighScores((prevScores) => [...prevScores, { name: name, score: result.score }]);
+      setShowScores(true);
+    } catch (error) {
+      console.error("Error saving score:", error);
+    }
   };
 
   return (
@@ -52,7 +59,7 @@ const Result = ({ totalQuestions, result, onTryAgain }) => {
             <tbody>
               {highScores.map((highScore, i) => {
                 return (
-                  <tr key={`${highScore.socre}${highScore.name}${i}`}>
+                  <tr key={`${highScore.score}${highScore.name}${i}`}>
                     <td>{i + 1}</td>
                     <td>{highScore.name}</td>
                     <td>{highScore.score}</td>

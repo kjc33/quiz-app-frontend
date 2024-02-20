@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import AnswerTimer from "../AnswerTimer/AnswerTimer";
 import Result from "../Result/Result";
+import axios from "axios";
 
 import "./Quiz.scss";
 
@@ -9,7 +10,7 @@ const Quiz = ({ questions }) => {
   const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
 
-  const resultInitalState = useMemo(
+  const resultInitialState = useMemo(
     () => ({
       score: 0,
       correctAnswer: 0,
@@ -18,15 +19,15 @@ const Quiz = ({ questions }) => {
     []
   );
 
-  const [result, setResult] = useState(resultInitalState);
+  const [result, setResult] = useState(resultInitialState);
   const [showResult, setShowResult] = useState(false);
   const [key, setKey] = useState(0);
 
   useEffect(() => {
     if (!showResult) {
-      setResult(resultInitalState);
+      setResult(resultInitialState);
     }
-  }, [showResult, resultInitalState]);
+  }, [showResult, resultInitialState]);
 
   const { question_name, choice_1, choice_2, choice_3, choice_4, answer: correctAnswer, type } = questions[currentQuestion];
 
@@ -65,7 +66,7 @@ const Quiz = ({ questions }) => {
   };
 
   const onTryAgain = () => {
-    setResult(resultInitalState);
+    setResult(resultInitialState);
     setAnswer(null);
     setShowResult(false);
   };
@@ -75,6 +76,18 @@ const Quiz = ({ questions }) => {
       setAnswer(false);
     }
     onClickNext();
+  };
+
+  const handleSubmitScore = async (name, score) => {
+    try {
+      await axios.post("https://quiz-app-backend-32v6.onrender.com/api/users", {
+        user_name: name,
+        score: score,
+      });
+      console.log("Score submitted successfully");
+    } catch (error) {
+      console.error("Error submitting score:", error.response.data);
+    }
   };
 
   const getAnswerUI = () => {
@@ -120,7 +133,7 @@ const Quiz = ({ questions }) => {
           </div>
         </>
       ) : (
-        <Result result={result} onTryAgain={onTryAgain} totalQuestions={questions.length} />
+        <Result result={result} onTryAgain={onTryAgain} totalQuestions={questions.length} onSubmit={handleSubmitScore} />
       )}
     </div>
   );

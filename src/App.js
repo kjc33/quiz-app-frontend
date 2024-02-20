@@ -4,6 +4,7 @@ import axios from "axios";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Exam from "./pages/Exam";
+import Home from "./components/Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavigationBar from "./components/NavigationBar";
 import Logout from "./components/Logout";
@@ -35,7 +36,7 @@ function App() {
       <Router>
         <NavigationBar />
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/dashboard"
