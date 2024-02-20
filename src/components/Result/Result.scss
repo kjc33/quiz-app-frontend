@@ -1,0 +1,22 @@
+@import "../../styles/vars.scss";
+
+.result {
+    text-align: center;
+
+    h3 {
+        font-size: 1.5rem;
+        letter-spacing: 1.4px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1rem;
+        font-weight: 500;
+        color: $body;
+    
+       span {
+            color: $primary;
+            font-size: 1.5rem;
+        }
+    }
+}

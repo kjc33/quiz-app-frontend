@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { resultInitalState } from "../../constants";
 import AnswerTimer from "../AnswerTimer/AnswerTimer";
+import Result from "../Result/Result";
 
 import "./Quiz.scss";
 
@@ -8,7 +9,6 @@ const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
-  const [inputAnswer, setInputAnswer] = useState();
   const [result, setResult] = useState({
     score: 0,
     correctAnswer: 0,
@@ -23,16 +23,17 @@ const Quiz = ({ questions }) => {
     }
   }, [showResult]);
 
-  const { question, choices, correctAnswer, type } = questions[currentQuestion];
+  const { question_name, choice_1, choice_2, choice_3, choice_4, answer: correctAnswer, type } = questions[currentQuestion];
 
-  const onAnswerClick = (answer, index) => {
-    setAnswerIndex(index);
-    if (answer === correctAnswer) {
+  const onAnswerClick = (selectedAnswerIndex) => {
+    setAnswerIndex(selectedAnswerIndex);
+    if (selectedAnswerIndex === correctAnswer) {
       setAnswer(true);
     } else {
       setAnswer(false);
     }
   };
+  
 
   const onClickNext = () => {
     if (answer !== null) {
@@ -68,34 +69,27 @@ const Quiz = ({ questions }) => {
     onClickNext();
   };
 
-  const handleInputChange = (evt) => {
-    setInputAnswer(evt.target.value);
-
-    if (evt.target.value === correctAnswer) {
-      setAnswer(true);
-    } else {
-      setAnswer(false);
-    }
-  }
-
   const getAnswerUI = () => {
-    if (!choices) return null;
-    
-    if (type === "FIB") {
-      return <input value={inputAnswer} onChange={handleInputChange} />;
-    }
-
+    if (!choice_1 || !choice_2 || !choice_3 || !choice_4) return null;
+  
     return (
       <ul>
-        {choices.map((answer, index) => (
-          <li onClick={() => onAnswerClick(answer, index)} key={answer} className={answerIndex === index ? "selected-answer" : null}>
-            {answer}
-          </li>
-        ))}
+        <li onClick={() => onAnswerClick(0)} className={answerIndex === 0 ? "selected-answer" : null}>
+          {choice_1}
+        </li>
+        <li onClick={() => onAnswerClick(1)} className={answerIndex === 1 ? "selected-answer" : null}>
+          {choice_2}
+        </li>
+        <li onClick={() => onAnswerClick(2)} className={answerIndex === 2 ? "selected-answer" : null}>
+          {choice_3}
+        </li>
+        <li onClick={() => onAnswerClick(3)} className={answerIndex === 3 ? "selected-answer" : null}>
+          {choice_4}
+        </li>
       </ul>
     );
   };
-
+  
   return (
     <div className="quiz-container">
       {!showResult ? (
@@ -106,34 +100,19 @@ const Quiz = ({ questions }) => {
             <span className="total-questions">/{questions.length}</span>
           </div>
           <div className="question">
-            <h2>{question}</h2>
+            <h2>{question_name}</h2>
           </div>
           <div className="choices">
             {getAnswerUI(type)}
             <div className="quiz-footer">
-              <button onClick={onClickNext} disabled={answerIndex === null && !inputAnswer}>
+              <button onClick={onClickNext} disabled={answerIndex === null}>
                 {currentQuestion === questions.length - 1 ? "Submit" : "Next"}
               </button>
             </div>
           </div>
         </>
       ) : (
-        <div className="result">
-          <h3>Results</h3>
-          <p>
-            Number of Questions: <span>{questions.length}</span>
-          </p>
-          <p>
-            Correct Answers: <span>{result.correctAnswer}</span>
-          </p>
-          <p>
-            Wrong Answers: <span>{result.wrongAnswers}</span>
-          </p>
-          <p>
-            Total Score: <span>{result.score}</span>
-          </p>
-          <button onClick={onTryAgain}>Try Again</button>
-        </div>
+        <Result result={result} onTryAgain={onTryAgain} totalQuestions={questions.length} />
       )}
     </div>
   );
