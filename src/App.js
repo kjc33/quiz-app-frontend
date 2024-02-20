@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Exam from "./pages/Exam";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavigationBar from "./components/NavigationBar";
-import Logout from "./components/NavigationBar";
+import Logout from "./components/Logout";
 
 import "./styles/index.scss";
 import NotFound from "./pages/NotFound";
@@ -46,7 +46,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/exam" element={<ProtectedRoute><Exam questions={questions} /></ProtectedRoute>} />
+          <Route path="/exam" element={<Exam questions={questions} />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

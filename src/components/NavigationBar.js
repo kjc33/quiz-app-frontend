@@ -15,6 +15,9 @@ export default function NavigationBar() {
           {token ? (
             <>
               <li>
+                <Link to="/exam">Exam</Link>
+              </li>
+              <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
