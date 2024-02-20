@@ -1,10 +1,12 @@
+// App.js
+
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Exam from "./pages/Exam";
+import Register from "./components/Register/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavigationBar from "./components/NavigationBar";
 import Logout from "./components/Logout";
@@ -36,17 +38,26 @@ function App() {
       <Router>
         <NavigationBar />
         <Routes>
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute isAdminRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
           />
-          <Route path="/exam" element={<Exam questions={questions} />} />
+          <Route
+            path="/exam"
+            element={
+              <ProtectedRoute isAdminRoute={false}>
+                {" "}
+                <Exam questions={questions} />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

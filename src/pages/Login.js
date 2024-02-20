@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,15 +22,19 @@ export default function Login() {
 
       localStorage.setItem("token", response.data.token);
 
+      setErrorMessage("");
+
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error: ", error.response.data);
+      setErrorMessage("Username or password are incorrect. Please try again.");
     }
   };
 
   return (
     <div>
       <h1>Login</h1>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>

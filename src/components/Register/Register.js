@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+import "./Register.scss";
+
+function Register() {
   const [name, setName] = useState("");
 
   const navigate = useNavigate();
@@ -32,3 +34,5 @@ export default function Register() {
     </div>
   );
 }
+
+export default Register;

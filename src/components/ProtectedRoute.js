@@ -1,8 +1,8 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth"; // Adjust the path as needed
+import useAuth from "../hooks/useAuth";
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, isAdminRoute }) => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
   if (!isAuthenticated) {
     // Redirect to the login page if not authenticated
     // after the loading (authentication check) has completed
-    return <Navigate to="/login" />;
+    return isAdminRoute ? <Navigate to="/admin/login" /> : <Navigate to="/exam" />;
   }
 
   return children;
