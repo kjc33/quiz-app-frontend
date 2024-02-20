@@ -25,36 +25,37 @@ const Quiz = ({ questions }) => {
 
   const { question_name, choice_1, choice_2, choice_3, choice_4, answer: correctAnswer, type } = questions[currentQuestion];
 
+  const questionAnswerEnum = ["A", "B", "C", "D"];
+
   const onAnswerClick = (selectedAnswerIndex) => {
     setAnswerIndex(selectedAnswerIndex);
-    if (selectedAnswerIndex === correctAnswer) {
+    const correctAnswerIndex = questionAnswerEnum.indexOf(correctAnswer);
+    if (selectedAnswerIndex === correctAnswerIndex) {
       setAnswer(true);
     } else {
       setAnswer(false);
     }
   };
-  
 
   const onClickNext = () => {
-    if (answer !== null) {
-      setAnswerIndex(null);
+    const isCorrectAnswer = answer === true;
 
-      const isCorrectAnswer = answer === true;
+    setResult((prev) => ({
+      ...prev,
+      score: isCorrectAnswer ? prev.score + 20 : prev.score,
+      correctAnswer: isCorrectAnswer ? prev.correctAnswer + 1 : prev.correctAnswer,
+      wrongAnswers: isCorrectAnswer ? prev.wrongAnswers : prev.wrongAnswers + 1,
+    }));
 
-      setResult((prev) => ({
-        ...prev,
-        score: isCorrectAnswer ? prev.score + 20 : prev.score,
-        correctAnswer: isCorrectAnswer ? prev.correctAnswer + 1 : prev.correctAnswer,
-        wrongAnswers: isCorrectAnswer ? prev.wrongAnswers : prev.wrongAnswers + 1,
-      }));
+    setAnswer(null);
+    setAnswerIndex(null);
 
-      if (currentQuestion !== questions.length - 1) {
-        setCurrentQuestion((prev) => prev + 1);
-        setKey((prevKey) => prevKey + 1);
-      } else {
-        setCurrentQuestion(0);
-        setShowResult(true);
-      }
+    if (currentQuestion !== questions.length - 1) {
+      setCurrentQuestion((prev) => prev + 1);
+      setKey((prevKey) => prevKey + 1);
+    } else {
+      setCurrentQuestion(0);
+      setShowResult(true);
     }
   };
 
@@ -65,13 +66,15 @@ const Quiz = ({ questions }) => {
   };
 
   const handleTimeExpire = () => {
-    setAnswer(false);
+    if (answer === null) {
+      setAnswer(false);
+    }
     onClickNext();
   };
 
   const getAnswerUI = () => {
     if (!choice_1 || !choice_2 || !choice_3 || !choice_4) return null;
-  
+
     return (
       <ul>
         <li onClick={() => onAnswerClick(0)} className={answerIndex === 0 ? "selected-answer" : null}>
@@ -89,7 +92,7 @@ const Quiz = ({ questions }) => {
       </ul>
     );
   };
-  
+
   return (
     <div className="quiz-container">
       {!showResult ? (
