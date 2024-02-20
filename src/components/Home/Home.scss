@@ -1,0 +1,12 @@
+@import "../../styles/vars.scss";
+
+table {
+  width: 50%;
+  text-align: left;
+  margin: 50px auto 20px;
+  border-collapse: collapse;
+
+  tr {
+    border: 1px solid;
+  }
+}
