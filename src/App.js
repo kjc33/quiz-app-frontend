@@ -44,7 +44,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

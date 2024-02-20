@@ -52,7 +52,7 @@ const Result = ({ totalQuestions, result, onTryAgain }) => {
             <tbody>
               {highScores.map((highScore, i) => {
                 return (
-                  <tr>
+                  <tr key={`${highScore.socre}${highScore.name}${i}`}>
                     <td>{i + 1}</td>
                     <td>{highScore.name}</td>
                     <td>{highScore.score}</td>
