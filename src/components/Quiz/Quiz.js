@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { resultInitalState } from "../../constants";
+import React, { useState, useEffect, useMemo } from "react";
 import AnswerTimer from "../AnswerTimer/AnswerTimer";
 import Result from "../Result/Result";
 
@@ -9,11 +8,17 @@ const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
-  const [result, setResult] = useState({
-    score: 0,
-    correctAnswer: 0,
-    wrongAnswers: 0,
-  });
+
+  const resultInitalState = useMemo(
+    () => ({
+      score: 0,
+      correctAnswer: 0,
+      wrongAnswers: 0,
+    }),
+    []
+  );
+
+  const [result, setResult] = useState(resultInitalState);
   const [showResult, setShowResult] = useState(false);
   const [key, setKey] = useState(0);
 
@@ -21,7 +26,7 @@ const Quiz = ({ questions }) => {
     if (!showResult) {
       setResult(resultInitalState);
     }
-  }, [showResult]);
+  }, [showResult, resultInitalState]);
 
   const { question_name, choice_1, choice_2, choice_3, choice_4, answer: correctAnswer, type } = questions[currentQuestion];
 
