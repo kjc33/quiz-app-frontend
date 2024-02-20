@@ -19,4 +19,15 @@
             font-size: 1.5rem;
         }
     }
+
+    table {
+        width: 50%;
+        text-align: left;
+        margin: 50px auto 20px;
+        border-collapse: collapse;
+
+        tr {
+            border: 1px solid;
+        }
+    }
 }
