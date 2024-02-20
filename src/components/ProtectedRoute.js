@@ -13,7 +13,13 @@ const ProtectedRoute = ({ children, isAdminRoute }) => {
   if (!isAuthenticated) {
     // Redirect to the login page if not authenticated
     // after the loading (authentication check) has completed
-    return isAdminRoute ? <Navigate to="/admin/login" /> : <Navigate to="/exam" />;
+    return isAdminRoute ? <Navigate to="/admin/login" /> : <Navigate to="/login" />;
+  }
+
+  const hasProvidedName = localStorage.getItem("hasProvidedName") === "true";
+
+  if (!hasProvidedName && !isAdminRoute) {
+    return <Navigate to="/" />;
   }
 
   return children;

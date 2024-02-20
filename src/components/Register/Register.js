@@ -16,6 +16,7 @@ function Register() {
         user_name: name,
       });
       console.log("Registration successful", response.data);
+      localStorage.setItem("hasProvidedName", "true");
       navigate("/exam");
     } catch (error) {
       console.error("Register error: ", error.response.data);
