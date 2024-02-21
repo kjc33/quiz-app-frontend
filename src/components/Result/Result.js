@@ -37,15 +37,15 @@ const Result = ({ totalQuestions, result, onTryAgain, onSubmit }) => {
         Wrong Answers: <span>{result.wrongAnswers}</span>
       </p>
       <p>
-        Total Score: <span>{result.score}</span>
+        Total Score: <span>{result.score}%</span>
       </p>
       <button onClick={onTryAgain}>Try Again</button>
       {!showScores ? (
-        <>
+        <div className="add-to-leaderboard">
           <h3>Add to Leaderboard</h3>
-          <input placeholder="Name" value={name} onChange={(evt) => setName(evt.target.value)} />
-          <button onClick={handleSave}>Save</button>
-        </>
+          <input placeholder="Name" id="user-name" name="user-name" value={name} onChange={(evt) => setName(evt.target.value)} />
+          <button className="btn" onClick={handleSave}>Save</button>
+        </div>
       ) : (
         <>
           <table>

@@ -21,9 +21,9 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="register">
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="registration-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" autoComplete="given-name" value={name} onChange={(e) => setName(e.target.value)} />

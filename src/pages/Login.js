@@ -33,10 +33,10 @@ export default function Login({ setToken }) {
   };
 
   return (
-    <div>
+    <div className="login">
       <h1>Login</h1>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="admin-login-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -45,7 +45,7 @@ export default function Login({ setToken }) {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit">Login</button>
+        <button className="btn" type="submit">Login</button>
       </form>
     </div>
   );

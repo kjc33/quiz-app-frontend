@@ -3,9 +3,11 @@ import QuestionEditor from "../components/QuestionEditor/QuestionEditor"
 
 export default function Dashboard() {
   return (
-    <div>
+    <section className="dashboard">
+      <div className="container">
       <h1>Dashboard</h1>
       <QuestionEditor />
-    </div>
+      </div>
+    </section>
   );
 }
