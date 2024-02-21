@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 export default function NavigationBar({ token }) {
   return (
     <div className="site-nav">
-      <nav>
-        <ul>
+      <nav className="primary-nav">
+        <ul className="nav-list">
           {token ? (
-            <li>
+            <li className="nav-items">
               <Link to="/logout">Logout</Link>
             </li>
           ) : (
-            <li>
+            <li className="nav-items">
               <Link to="/login">Login</Link>
             </li>
           )}

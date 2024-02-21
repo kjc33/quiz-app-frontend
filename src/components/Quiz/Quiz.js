@@ -45,25 +45,31 @@ const Quiz = ({ questions }) => {
 
   const onClickNext = () => {
     const isCorrectAnswer = answer === true;
-
+  
     setResult((prev) => ({
       ...prev,
-      score: isCorrectAnswer ? prev.score + 20 : prev.score,
-      correctAnswer: isCorrectAnswer ? prev.correctAnswer + 1 : prev.correctAnswer,
-      wrongAnswers: isCorrectAnswer ? prev.wrongAnswers : prev.wrongAnswers + 1,
+      score: isCorrectAnswer ? prev.score +  20 : prev.score,
+      correctAnswer: isCorrectAnswer ? prev.correctAnswer +  1 : prev.correctAnswer,
     }));
-
+  
+    if (!isCorrectAnswer) {
+      setResult((prev) => ({
+        ...prev,
+        wrongAnswers: prev.wrongAnswers +  1,
+      }));
+    }
+  
     setAnswer(null);
     setAnswerIndex(null);
-
-    if (currentQuestion !== questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
-      setKey((prevKey) => prevKey + 1);
+  
+    if (currentQuestion !== questions.length -  1) {
+      setCurrentQuestion((prev) => prev +  1);
+      setKey((prevKey) => prevKey +  1);
     } else {
       setCurrentQuestion(0);
       setShowResult(true);
     }
-  };
+  };  
 
   const onTryAgain = () => {
     setResult(resultInitialState);
@@ -76,7 +82,7 @@ const Quiz = ({ questions }) => {
       setAnswer(false);
     }
     onClickNext();
-  };
+  };  
 
   const handleSubmitScore = async (name, score) => {
     try {
@@ -112,16 +118,16 @@ const Quiz = ({ questions }) => {
   };
 
   return (
-    <div className="quiz-container">
+    <div className="quiz">
       {!showResult ? (
         <>
-          <AnswerTimer key={key} duration={15} timeExpire={handleTimeExpire} />
+          <AnswerTimer key={key} duration={5} timeExpire={handleTimeExpire} />
           <div className="pagination">
             <span className="active-question-number">{currentQuestion + 1}</span>
             <span className="total-questions">/{questions.length}</span>
           </div>
           <div className="question">
-            <h2>{question_name}</h2>
+            <p>{question_name}</p>
           </div>
           <div className="choices">
             {getAnswerUI(type)}
