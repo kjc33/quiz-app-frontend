@@ -12,10 +12,14 @@ import Logout from "./components/Logout";
 import "./styles/index.scss";
 import NotFound from "./pages/NotFound";
 
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
-
 function App() {
   const [questions, setQuestions] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  useEffect(() => {
+    axios.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null;
+  }, [token]);
+
   useEffect(() => {
     getQuestions();
   }, []);
@@ -34,10 +38,10 @@ function App() {
   return (
     <>
       <Router>
-        <NavigationBar />
+        <NavigationBar token={token} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setToken={setToken} />} />
           <Route
             path="/dashboard"
             element={
@@ -47,7 +51,7 @@ function App() {
             }
           />
           <Route path="/exam" element={<Exam questions={questions} />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/logout" element={<Logout setToken={setToken} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

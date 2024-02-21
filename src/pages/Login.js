@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,6 +21,7 @@ export default function Login() {
       console.log("Login successful", response.data);
 
       localStorage.setItem("token", response.data.token);
+      setToken(response.data.token); // Update the token state in the parent component
 
       setErrorMessage("");
 
@@ -38,7 +39,7 @@ export default function Login() {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" id="email" name="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div>
           <label htmlFor="password">Password</label>

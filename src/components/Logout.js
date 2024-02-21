@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Logout() {
-    const navigate = useNavigate()
+export default function Logout({ setToken }) {
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        // clear the token from localStorage
-        localStorage.removeItem('token')
+  useEffect(() => {
+    // Clear the token from localStorage
+    localStorage.removeItem("token");
 
-        // redirect to the home page
-        navigate('/')
-    }, [navigate])
+    // Update the token state in the parent component
+    setToken(null);
 
-    return (
-        <div>
-            Logging out...
-        </div>
-    )
+    // Redirect to the home page
+    navigate("/");
+  }, [navigate, setToken]);
+
+  return <div>Logging out...</div>;
 }
