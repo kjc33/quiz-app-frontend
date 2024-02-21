@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import HeroButton from "../components/HeroButton/HeroButton";
+
 const HomePage = () => {
   const [leaderboard, setLeaderboard] = useState([]);
 
@@ -22,29 +24,41 @@ const HomePage = () => {
   }, []);
 
   return (
-    <section className="leaderboard">
-      <div className="container">
-        <h1>Leaderboard</h1>
-        <table className="leaderboard-table">
-          <thead className="leaderboard-head">
-            <tr>
-              <th>Rank</th>
-              <th>User Name</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody className="leaderboard-body">
-            {leaderboard.map((user, index) => (
-              <tr key={user.id}>
-                <td>{index + 1}</td>
-                <td>{user.user_name}</td>
-                <td>{user.score}</td>
+    <>
+      <section className="hero">
+        <div className="container flex flex-row space-between large-gap flex-wrap full-height max-width">
+          <div className="primary-heading">
+            <h1>Are you up to the test?</h1>
+          </div>
+          <div className="hero-cta-btn">
+            <HeroButton buttonLink="/exam" buttonText="Try Now"></HeroButton>
+          </div>
+        </div>
+      </section>
+      <section className="leaderboard" id="top-scores">
+        <div className="container">
+          <h2>Top Scores</h2>
+          <table className="leaderboard-table">
+            <thead className="leaderboard-head">
+              <tr>
+                <th>Rank</th>
+                <th>User Name</th>
+                <th>Score</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
+            </thead>
+            <tbody className="leaderboard-body">
+              {leaderboard.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{index + 1}</td>
+                  <td>{user.user_name}</td>
+                  <td>{user.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </>
   );
 };
 
