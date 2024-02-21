@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import "./Home.scss";
-
 const HomePage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
   
@@ -26,7 +24,7 @@ const HomePage = () => {
     return (
       <div>
         <h1>Leaderboard</h1>
-        <table>
+        <table className="leaderboard">
           <thead>
             <tr>
               <th>Rank</th>

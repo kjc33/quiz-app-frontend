@@ -4,10 +4,10 @@ import axios from "axios";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Exam from "./pages/Exam";
-import Home from "./components/Home/Home";
-import ProtectedRoute from "./components/ProtectedRoute";
-import NavigationBar from "./components/NavigationBar";
-import Logout from "./components/Logout";
+import Home from "./pages/Home";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
+import Logout from "./components/Logout/Logout";
 
 import "./styles/index.scss";
 import NotFound from "./pages/NotFound";
