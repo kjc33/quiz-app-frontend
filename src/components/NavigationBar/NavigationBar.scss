@@ -13,14 +13,21 @@
   & a {
     color: $bg;
   }
+  & .nav-list {
+    display: none;
+  }
 }
 
 header {
   padding: 0 30px 0 30px;
+  background-color: $accent;
 }
 
 // Media Queries
 @media screen and (min-width: 768px) {
+  .primary-nav .nav-list {
+    display: flex;
+  }
   header {
     padding: 0 50px 0 50px;
   }

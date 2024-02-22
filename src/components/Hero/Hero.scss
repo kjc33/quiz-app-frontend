@@ -1,0 +1,29 @@
+@import "../../styles/vars.scss";
+
+.hero {
+    position: relative;
+    background-color: $accent;
+  
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -30px;
+      right: 0;
+      height: 30px;
+      width: 50%;
+      background-color: #2b3944;
+    }
+  
+    .container {
+      height: 150px;
+    }
+  }
+
+  // Media Queries
+  @media screen and (min-width: 500px) {
+   // Hero Gap
+   .hero .container.medium-gap {
+    gap: 50px;
+   }
+  }
