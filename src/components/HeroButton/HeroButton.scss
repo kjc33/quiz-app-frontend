@@ -2,8 +2,20 @@
 
 .hero-cta-btn {
     position: relative;
+    background-color: $links;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
 
     a {
-        color: $bg;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.875rem;
+        text-align: center;
+        color: $body;
+        text-decoration: none;
+        text-transform: uppercase;
     }
 }
