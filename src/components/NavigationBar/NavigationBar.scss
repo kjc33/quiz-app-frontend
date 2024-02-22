@@ -9,15 +9,24 @@ header {
   height: 90px;
 
   & ul {
-    list-style-type: none;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 30px;
+    list-style-type: none;
   }
 
   & a {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
     color: $bg;
   }
+
+  & a:hover {
+    color: $links-hover;
+  }
+
   & .nav-list {
     display: none;
   }
@@ -30,5 +39,11 @@ header {
   }
   header {
     padding: 0 50px 0 50px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .primary-nav a {
+    font-size: 1.25rem;
   }
 }

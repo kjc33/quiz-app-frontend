@@ -5,8 +5,8 @@ import "./HeroButton.scss";
 
 export default function Button({ buttonLink, buttonText }) {
   return (
-    <div className="hero-cta-btn">
-      <Link to={buttonLink}>{buttonText}</Link>
-    </div>
+    <Link to={buttonLink} className="hero-cta-btn">
+      <span className="hero-btn-text">{buttonText}</span>
+    </Link>
   );
 }

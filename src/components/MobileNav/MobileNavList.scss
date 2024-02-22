@@ -26,11 +26,12 @@
         list-style-type: none;
 
         .nav-item a {
-          text-transform: uppercase;
-          text-decoration: none;
-          color: $bg;
+          font-size: 1rem;
           font-weight:  600;
           letter-spacing:  4px;
+          color: $bg;
+          text-transform: uppercase;
+          text-decoration: none;
 
           &:hover {
             color: $links-hover;
@@ -57,7 +58,6 @@
         width:  20px;
         height:  3px;
         background: $bg;
-        border-radius:  1px;
         cursor: pointer;
         z-index:  10;
       }
@@ -73,13 +73,20 @@
 }
 
 @media screen and (min-width:  350px) {
-  .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
     font-size:  2.25rem;
   }
 }
 
+@media screen and (min-width: 350px) and (max-width: 768px) {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .close-btn::before, 
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .close-btn::after {
+    width: 30px;
+  }
+}
+
 @media screen and (min-width:  500px) {
-  .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
     font-size:  3.5rem;
   }
   .close-btn::before, .close-btn::after {
@@ -91,13 +98,13 @@
   .mobile-menu-nav-items {
     padding:  50px  50px;
   }
-  .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
     font-size:  5rem;
   }
 }
 
 @media screen and (min-width:  880px) {
-  .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .mobile-menu-nav-items .mobile-menu-nav-list-items .nav-item a {
     font-size:  6rem;
   }
 }

@@ -32,4 +32,24 @@
   .hero .container.medium-gap {
     gap: 50px;
   }
+  .hero .container {
+    min-height: 200px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .hero::after {
+    bottom: -50px;
+    height: 50px;
+  }
+  .hero .container {
+    min-height: 250px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+    .hero::after {
+      bottom: -80px;
+      height: 80px;
+    }
 }
