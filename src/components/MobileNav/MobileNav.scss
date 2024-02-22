@@ -1,0 +1,43 @@
+@import "../../styles/vars.scss";
+
+.mobile-menu-burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  cursor: pointer;
+
+  & .top-bar,
+  & .middle-bar,
+  & .bottom-bar {
+    height: 3px;
+    width: 30px;
+    background-color: $bg;
+    transition: 0.4s;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .mobile-menu-nav-items {
+    padding: 80px 50px;
+  }
+  .mobile-menu-wrapper {
+    display: none;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .mobile-menu-wrapper .mobile-menu-nav-wrapper .mobile-menu-nav-items.active,
+  .mobile-close-btn.visible {
+    display: block;
+    z-index: 9;
+  }
+  .primary-header .header-inner .mobile-menu-wrapper .mobile-menu-nav-wrapper {
+    display: flex;
+  }
+  .primary-header .header-inner .mobile-menu-wrapper {
+    display: block;
+    margin-left: auto;
+  }
+}

@@ -2,15 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../media/quizer-logo-light.svg";
+import MobileNav from "../MobileNav/MobileNav";
 import "./NavigationBar.scss";
 
 export default function NavigationBar({ token }) {
   return (
     <header>
       <div className="container flex align-items-center space-between medium-gap max-width">
-        <figure>
+        <figure className="site-logo">
           <Link to="/">
-            <img src={Logo} alt="Quizer Logo" width="120px" height="auto" />
+            <img src={Logo} alt="Quizer Logo" width="100px" height="auto" />
           </Link>
         </figure>
         <nav className="primary-nav flex align-items-center">
@@ -32,6 +33,7 @@ export default function NavigationBar({ token }) {
             )}
           </ul>
         </nav>
+        <MobileNav />
       </div>
     </header>
   );
