@@ -1,0 +1,64 @@
+@import "../../styles/vars.scss";
+
+footer {
+  position: relative;
+  background-color: $accent;
+  margin-top: 30px;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -30px;
+    left: 0;
+    height: 30px;
+    width: 50%;
+    background-color: $accent;
+  }
+
+  & .footer-signature a,
+  & .footer-signature p,
+  & .disclaimer a,
+  & .disclaimer p {
+    color: $footer-text;
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $bg;
+    }
+  }
+}
+
+.footer-divider {
+  border-top: solid 1px $footer-text;
+  margin-top: 30px;
+}
+
+@media screen and (min-width: 500px) {
+  .footer-logo img {
+    width: 90px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  footer {
+    margin-top: 50px;
+  }
+  footer::before {
+    top: -50px;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  footer {
+    margin-top: 80px;
+  }
+  footer::before {
+    top: -80px;
+    height: 80px;
+  }
+}

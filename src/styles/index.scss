@@ -8,7 +8,7 @@
 }
 
 // Sections
-section {
+section, footer {
   padding: 50px 30px 50px 30px;
 }
 
@@ -233,7 +233,7 @@ input {
     font-size: 2.5rem;
   }
   // Section
-  section {
+  section, footer {
     padding: 80px 50px 80px 50px;
   }
   .main-body-heading {
@@ -249,7 +249,7 @@ input {
 
 @media screen and (min-width: 1025px) {
   // Section 
-  section {
+  section, footer {
     padding: 120px 50px 120px 50px;
   }
   h1 {

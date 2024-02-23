@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Logout from "./components/Logout/Logout";
+import Footer from "./components/Footer/Footer";
 
 import "./styles/index.scss";
 import NotFound from "./pages/NotFound";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/logout" element={<Logout setToken={setToken} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );
