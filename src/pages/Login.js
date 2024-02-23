@@ -33,20 +33,24 @@ export default function Login({ setToken }) {
   };
 
   return (
-    <div className="login">
-      <h1>Login</h1>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <form className="admin-login-form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button className="btn" type="submit">Login</button>
-      </form>
-    </div>
+    <section className="login">
+      <div className="container flex flex-column medium-gap extra-small-width">
+        <h1 className="main-body-heading">Login</h1>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        <form className="admin-login-form" onSubmit={handleSubmit}>
+          <div className="email flex flex-column extra-small-gap">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="password flex flex-column extra-small-gap">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button className="btn" type="submit">
+            Login
+          </button>
+        </form>
+      </div>
+    </section>
   );
 }

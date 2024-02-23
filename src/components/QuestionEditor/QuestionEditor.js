@@ -40,16 +40,21 @@ const QuestionEditor = () => {
 
   return (
     <div className="exam-questions">
-      <h2>Exam Editor</h2>
       <ol className="exam-list">
         {questions.map((question) => (
           <li key={question.id}>
-            <div className="exam-question">{question.question_name}</div>
-            <div className="exam-choices">
-              Choices: {question.choice_1}, {question.choice_2}, {question.choice_3}, {question.choice_4}
+            <div className="exam-question">
+              <strong className="exam-editor-strong-text">Question:</strong> {question.question_name}
             </div>
-            <div className="correct-answer">Correct Answer: {question.answer}</div>
-            <button className="btn edit-btn" onClick={() => handleEditQuestion(question.id)}>Edit</button>
+            <div className="exam-choices">
+              <strong className="exam-editor-strong-text">Choices:</strong> A. {question.choice_1} <span className="pipe">|</span> B. {question.choice_2} <span className="pipe">|</span> C. {question.choice_3} <span className="pipe">|</span> D. {question.choice_4}
+            </div>
+            <div className="correct-answer">
+              <strong className="exam-editor-strong-text">Correct Answer:</strong> {question.answer}
+            </div>
+            <button className="btn edit-btn" onClick={() => handleEditQuestion(question.id)}>
+              Edit
+            </button>
           </li>
         ))}
       </ol>
@@ -106,7 +111,9 @@ const QuestionForm = ({ question, onSubmit }) => {
             <option value="D">D</option>
           </select>
         </label>
-        <button className="btn" type="submit">Submit</button>
+        <button className="btn" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

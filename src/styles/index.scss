@@ -109,8 +109,7 @@ section {
   height: 100vh;
 }
 
-// Page Elements
-
+// Headings & Body Elements
 h1 {
   font-size: 1rem;
   font-weight: 600;
@@ -155,6 +154,46 @@ p {
     height: 100%;
     border-left: solid 5px $primary;
   }
+}
+
+.btn {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: $body;
+  text-transform: uppercase;
+  background-color: $primary;
+  border: none;
+  padding: 15px 30px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $links-hover;
+  }
+}
+
+// Forms
+label {
+  font-size: 1rem;
+  color: $body;
+  text-transform: uppercase;
+}
+
+input {
+  font-size: 1rem;
+  color: $body;
+  border: solid 1px $border;
+  padding: 10px 15px;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(204, 204, 204, 0.5);
+  }
+}
+
+.email input,
+.password input {
+  margin-bottom: 20px;
 }
 
 // Media Queries

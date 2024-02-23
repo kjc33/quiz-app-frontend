@@ -1,1 +1,36 @@
 @import "../../styles/vars.scss";
+
+.exam-questions {
+    .exam-list {
+        margin-left: 18px;
+    }
+    & li:not(:last-child) {
+        padding-bottom: 30px;
+    }
+
+    & li .exam-question,
+    & li .exam-choices,
+    & li .correct-answer {
+        line-height: 1.5;
+        padding-bottom: 10px;
+    }
+    
+    & li .exam-editor-strong-text {
+        padding-right: 5px;
+    }
+
+    .edit-btn {
+        color: $disabled-text;
+        background-color: $disabled;
+        padding: 10px 20px;
+
+        &:hover {
+            color: $body;
+            background-color: $links-hover;
+        }
+    }
+}
+
+.pipe {
+    padding: 0 5px 0 5px;
+}
