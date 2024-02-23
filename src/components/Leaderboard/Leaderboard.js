@@ -25,22 +25,22 @@ export default function Leaderboard() {
 
   return (
     <section className="leaderboard" id="top-scores">
-      <div className="container flex flex-column align-items-center max-width">
+      <div className="container flex flex-column medium-gap max-width">
         <h2>Top Scores</h2>
         <table className="leaderboard-table">
           <thead className="leaderboard-head">
             <tr>
-              <th>Rank</th>
-              <th>User Name</th>
-              <th>Score</th>
+              <th className="th-rank">Rank</th>
+              <th className="th-user-name">User Name</th>
+              <th className="th-score">Score</th>
             </tr>
           </thead>
           <tbody className="leaderboard-body">
             {leaderboard.map((user, index) => (
               <tr key={user.id}>
-                <td>{index + 1}</td>
-                <td>{user.user_name}</td>
-                <td>{user.score}%</td>
+                <td className="td-rank">{index + 1}</td>
+                <td className="td-user-name">{user.user_name}</td>
+                <td className="td-user-score">{user.score}%</td>
               </tr>
             ))}
           </tbody>

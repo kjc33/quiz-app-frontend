@@ -121,6 +121,15 @@ h1 {
   width: 100%;
 }
 
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  color: $body;
+  text-transform: uppercase;
+}
+
 .main-body-heading {
   font-size: 2rem;
   color: $body;
@@ -129,6 +138,7 @@ h1 {
 p {
   font-size: 1rem;
   line-height: 1.5;
+  color: $body;
 }
 
 .primary-heading.left-border {
@@ -153,7 +163,7 @@ p {
   .hero .container .primary-heading {
     width: 50%;
   }
-  h1 {
+  h1, h2 {
     font-size: 1.25rem;
   }
   .main-body-heading {
