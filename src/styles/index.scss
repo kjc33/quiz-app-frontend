@@ -121,6 +121,16 @@ h1 {
   width: 100%;
 }
 
+.main-body-heading {
+  font-size: 2rem;
+  color: $body;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 .primary-heading.left-border {
   position: relative;
   align-self: center;
@@ -137,15 +147,6 @@ h1 {
   }
 }
 
-table {
-  text-align: left;
-  border-collapse: collapse;
-
-  tr {
-    border: 1px solid;
-  }
-}
-
 // Media Queries
 @media screen and (min-width: 350px) {
   // Primary Heading
@@ -155,17 +156,26 @@ table {
   h1 {
     font-size: 1.25rem;
   }
+  .main-body-heading {
+    font-size: 2.25rem;
+  }
 }
 
 @media screen and (min-width: 500px) {
   h1 {
     font-size: 1.5rem;
   }
+  .main-body-heading {
+    font-size: 2.50rem;
+  }
 }
 
 @media screen and (min-width: 640px) {
   h1 {
     font-size: 2rem;
+  }
+  .main-body-heading {
+    font-size: 2.75rem;
   }
 }
 
@@ -176,6 +186,9 @@ table {
   // Section
   section {
     padding: 80px 50px 80px 50px;
+  }
+  .main-body-heading {
+    font-size: 3rem;
   }
 }
 
@@ -192,6 +205,9 @@ table {
   }
   h1 {
     font-size: 3.5rem;
+  }
+  p {
+    font-size: 1.25rem;
   }
 }
 

@@ -12,9 +12,9 @@ export default function Leaderboard() {
           const response = await axios.get("https://quiz-app-backend-32v6.onrender.com/api/users");
           // Sort users based on score in descending order
           const sortedUsers = response.data.sort((a, b) => b.score - a.score);
-          // Get the top ten users
-          const topTen = sortedUsers.slice(0, 10);
-          setLeaderboard(topTen);
+          // Get the top fifteen users
+          const topFifteen = sortedUsers.slice(0, 15);
+          setLeaderboard(topFifteen);
         } catch (error) {
           console.error("Error fetching leaderboard:", error);
         }
@@ -25,7 +25,7 @@ export default function Leaderboard() {
 
   return (
     <section className="leaderboard" id="top-scores">
-      <div className="container max-width">
+      <div className="container flex flex-column align-items-center max-width">
         <h2>Top Scores</h2>
         <table className="leaderboard-table">
           <thead className="leaderboard-head">
@@ -40,7 +40,7 @@ export default function Leaderboard() {
               <tr key={user.id}>
                 <td>{index + 1}</td>
                 <td>{user.user_name}</td>
-                <td>{user.score}</td>
+                <td>{user.score}%</td>
               </tr>
             ))}
           </tbody>
