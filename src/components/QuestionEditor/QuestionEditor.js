@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Modal from "../Modal/Modal";
 
 import "./QuestionEditor.scss";
 
 const QuestionEditor = () => {
   const [questions, setQuestions] = useState([]);
   const [editedQuestion, setEditedQuestion] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -23,6 +25,11 @@ const QuestionEditor = () => {
   const handleEditQuestion = (questionId) => {
     const questionToEdit = questions.find((question) => question.id === questionId);
     setEditedQuestion(questionToEdit);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   const handleFormSubmit = async (editedData) => {
@@ -30,6 +37,7 @@ const QuestionEditor = () => {
       await axios.put(`https://quiz-app-backend-32v6.onrender.com/api/questions/${editedData.id}`, editedData);
       // Optionally, update state or display success message
       setEditedQuestion(null);
+      setShowModal(false);
       // Refetch questions to update the list
       const response = await axios.get("https://quiz-app-backend-32v6.onrender.com/api/questions");
       setQuestions(response.data);
@@ -58,12 +66,16 @@ const QuestionEditor = () => {
           </li>
         ))}
       </ol>
-      {editedQuestion && <QuestionForm question={editedQuestion} onSubmit={handleFormSubmit} />}
+      {showModal && (
+        <Modal onClose={handleCloseModal}>
+          <QuestionForm question={editedQuestion} onSubmit={handleFormSubmit} onCancel={handleCloseModal} />
+        </Modal>
+      )}
     </div>
   );
 };
 
-const QuestionForm = ({ question, onSubmit }) => {
+const QuestionForm = ({ question, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState(question);
 
   const handleChange = (e) => {
@@ -111,9 +123,14 @@ const QuestionForm = ({ question, onSubmit }) => {
             <option value="D">D</option>
           </select>
         </label>
-        <button className="btn" type="submit">
-          Submit
-        </button>
+        <div>
+          <button className="btn" type="submit">
+            Submit
+          </button>
+          <button className="btn" type="button" onClick={onCancel}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
