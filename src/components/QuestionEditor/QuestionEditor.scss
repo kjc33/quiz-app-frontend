@@ -18,17 +18,6 @@
     & li .exam-editor-strong-text {
         padding-right: 5px;
     }
-
-    .edit-btn {
-        color: $disabled-text;
-        background-color: $disabled;
-        padding: 10px 20px;
-
-        &:hover {
-            color: $body;
-            background-color: $links-hover;
-        }
-    }
 }
 
 .pipe {

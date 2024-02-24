@@ -7,7 +7,11 @@ const ProtectedRoute = ({ children, isAdminRoute }) => {
 
   if (isLoading) {
     // Optionally, render a loading indicator while waiting for the check to complete
-    return <div>Loading...</div>;
+    return (
+      <section>
+        <div className="container max-width">Loading...</div>
+      </section>
+    );
   }
 
   if (!isAuthenticated) {

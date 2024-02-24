@@ -2,15 +2,10 @@ import React from "react";
 
 import "./Modal.scss";
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ children }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <button className="modal-close-btn" onClick={onClose}>
-          X
-        </button>
-        <div className="modal-content">{children}</div>
-      </div>
+    <div className="modal-exam-editor">
+      {children}
     </div>
   );
 };

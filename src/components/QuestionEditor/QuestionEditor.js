@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "../Modal/Modal";
+import EditButton from "../EditButton/EditButton";
 
 import "./QuestionEditor.scss";
 
@@ -58,11 +59,9 @@ const QuestionEditor = () => {
               <strong className="exam-editor-strong-text">Choices:</strong> A. {question.choice_1} <span className="pipe">|</span> B. {question.choice_2} <span className="pipe">|</span> C. {question.choice_3} <span className="pipe">|</span> D. {question.choice_4}
             </div>
             <div className="correct-answer">
-              <strong className="exam-editor-strong-text">Correct Answer:</strong> {question.answer}
+              <strong className="exam-editor-strong-text">Answer:</strong> {question.answer}
             </div>
-            <button className="btn edit-btn" onClick={() => handleEditQuestion(question.id)}>
-              Edit
-            </button>
+            <EditButton className="edit-btn" onClick={() => handleEditQuestion(question.id)} btnText="Edit" />
           </li>
         ))}
       </ol>
@@ -92,30 +91,42 @@ const QuestionForm = ({ question, onSubmit, onCancel }) => {
   };
 
   return (
-    <div className="exam-editor">
-      <form className="exam-editor-form" onSubmit={handleSubmit}>
-        <label>
-          Question Name:
-          <input type="text" id="question_name" name="question_name" value={formData.question_name} onChange={handleChange} />
+    <form className="exam-editor-form flex flex-column medium-gap" onSubmit={handleSubmit}>
+      <div className="question">
+        <label className="flex flex-column extra-small-gap">
+          Question:
+          <textarea id="question_name" name="question_name" value={formData.question_name} onChange={handleChange} />
         </label>
-        <label>
-          Choice 1:
-          <input type="text" id="choice_1" name="choice_1" value={formData.choice_1} onChange={handleChange} />
-        </label>
-        <label>
-          Choice 2:
-          <input type="text" id="choice_2" name="choice_2" value={formData.choice_2} onChange={handleChange} />
-        </label>
-        <label>
-          Choice 3:
-          <input type="text" id="choice_3" name="choice_3" value={formData.choice_3} onChange={handleChange} />
-        </label>
-        <label>
-          Choice 4:
-          <input type="text" id="choice_4" name="choice_4" value={formData.choice_4} onChange={handleChange} />
-        </label>
-        <label>
-          Correct Answer:
+      </div>
+      <div className="choices flex flex-column medium-gap">
+        <div className="choice-1">
+          <label className="flex flex-column extra-small-gap">
+            Choice 1:
+            <input type="text" id="choice_1" name="choice_1" value={formData.choice_1} onChange={handleChange} />
+          </label>
+        </div>
+        <div className="choice-2">
+          <label className="flex flex-column extra-small-gap">
+            Choice 2:
+            <input type="text" id="choice_2" name="choice_2" value={formData.choice_2} onChange={handleChange} />
+          </label>
+        </div>
+        <div className="choice-3">
+          <label className="flex flex-column extra-small-gap">
+            Choice 3:
+            <input type="text" id="choice_3" name="choice_3" value={formData.choice_3} onChange={handleChange} />
+          </label>
+        </div>
+        <div className="choice-4">
+          <label className="flex flex-column extra-small-gap">
+            Choice 4:
+            <input type="text" id="choice_4" name="choice_4" value={formData.choice_4} onChange={handleChange} />
+          </label>
+        </div>
+      </div>
+      <div className="answer">
+        <label className="flex flex-row align-items-center extra-small-gap">
+          Answer:
           <select id="answer" name="answer" value={formData.answer} onChange={handleChange}>
             <option value="A">A</option>
             <option value="B">B</option>
@@ -123,16 +134,12 @@ const QuestionForm = ({ question, onSubmit, onCancel }) => {
             <option value="D">D</option>
           </select>
         </label>
-        <div>
-          <button className="btn" type="submit">
-            Submit
-          </button>
-          <button className="btn" type="button" onClick={onCancel}>
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div className="save-cancel-btns flex flex-row flex-wrap small-gap">
+        <EditButton className="btn save-btn" type="submit" onClick={handleSubmit} btnText="Save" />
+        <EditButton className="btn cancel-btn" type="button" onClick={onCancel} btnText="Cancel" />
+      </div>
+    </form>
   );
 };
 
