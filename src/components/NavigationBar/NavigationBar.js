@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../media/quizer-logo-light.svg";
@@ -6,8 +6,27 @@ import MobileNav from "../MobileNav/MobileNav";
 import "./NavigationBar.scss";
 
 export default function NavigationBar({ token }) {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header>
+    <header className={isScrolled ? "header-scrolled" : "header-static"}>
       <div className="container flex align-items-center space-between medium-gap max-width">
         <figure className="site-logo">
           <Link to="/">
@@ -20,7 +39,7 @@ export default function NavigationBar({ token }) {
               <Link to="/exam">Exam</Link>
             </li>
             <li className="nav-item">
-              <Link to="/#top-scores">Top Scores</Link>
+              <a href="/#top-scores">Top Scores</a>
             </li>
             {token ? (
               <li className="nav-item">

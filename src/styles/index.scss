@@ -19,9 +19,12 @@ header {
   z-index: 10;
 }
 
-section,
-footer {
+section, footer {
   padding: 50px 30px 50px 30px;
+}
+
+section {
+  scroll-margin-top: 90px;
 }
 
 // Positioning
