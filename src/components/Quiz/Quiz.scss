@@ -1,49 +1,40 @@
 @import "../../styles/vars.scss";
 
-.quiz {
+.exam-wrapper {
     position: relative;
-    width: 500px;
     background: $bg;
     border-radius: 4px;
-    margin-top: 100px;
-    padding: 30px 60px;
 
-    .active-question-number {
-        font-size: 2rem;
-        font-weight: 500;
-        color: $primary;
+    .pagination {
+        padding: 50px 0 30px 0;
+
     }
 
-    .total-questions {
+    .active-question-number, .total-questions {
         font-size: 1rem;
         font-weight: 500;
         color: $disabled;
     }
 
-    h2 {
-        font-size: 1.25rem;
-        font-weight: 500;
-    }
-
     ul {
-        margin: 20px 0 0 0;
+        margin: 30px 0 0 0;
 
         li {
             list-style: none;
             text-decoration: none;
-            color: $foreground;
+            color: $body;
             font-size: 1rem;
             background: $bg;
-            border: 1px solid $disabled;
-            border-radius: 16px;
-            padding: 11px;
+            border: 1px solid $border;
+            padding: 15px;
             margin-top: 15px;
+            transition: background-color 0.3s ease;
             cursor: pointer;
         }
 
         .selected-answer {
-            background: $primary;
-            border: 1px solid $accent;
+            background-color: $bg-alt;
+            border: 1px solid $bg-alt;
             color: $bg;
         }
     }
@@ -55,13 +46,13 @@
 
     button {
         background: $primary;
-        border-radius: 9px;
         font-size: 1.125rem;
         color: $bg;
-        padding: 10px 42px;
+        padding: 15px 30px;
         outline: none;
         border: none;
-        margin: 15px 0;
+        margin: 15px 0 0 0;
+        transition: background-color 0.3s ease;
         cursor: pointer;
 
         &:disabled {
@@ -69,5 +60,18 @@
             color: $bg;
             cursor: not-allowed;
         }
+
+        &:not(:disabled) {
+            &:hover {
+                background-color: $links-hover;
+            }
+        }
     }
+}
+
+.btn.basic-btn {
+    font-size: 1rem;
+    color: $disabled-text;
+    background-color: $disabled;
+    padding: 10px 20px;
 }

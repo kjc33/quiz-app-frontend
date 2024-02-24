@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Result.scss";
+import Button from "../EditButton/EditButton";
 
 const Result = ({ totalQuestions, result, onTryAgain, onSubmit }) => {
   const [name, setName] = useState("");
   const [highScores, setHighScores] = useState([]);
-  const [showScores, setShowScores] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (showScores) {
+    if (highScores.length > 0) {
       navigate("/");
     }
-  }, [showScores, navigate]);
+  }, [highScores, navigate]);
 
   const handleSave = async () => {
     try {
       await onSubmit(name, result.score);
       setHighScores((prevScores) => [...prevScores, { name: name, score: result.score }]);
-      setShowScores(true);
     } catch (error) {
       console.error("Error saving score:", error);
     }
@@ -26,50 +25,25 @@ const Result = ({ totalQuestions, result, onTryAgain, onSubmit }) => {
 
   return (
     <div className="result">
-      <h3>Results</h3>
-      <p>
-        Number of Questions: <span>{totalQuestions}</span>
+      <h2>Results</h2>
+      <p className="results-text">
+        Number of Questions: <span className="results-number">{totalQuestions}</span>
       </p>
-      <p>
-        Correct Answers: <span>{result.correctAnswer}</span>
+      <p className="results-text">
+        Correct Answers: <span className="results-number">{result.correctAnswer}</span>
       </p>
-      <p>
-        Wrong Answers: <span>{result.wrongAnswers}</span>
+      <p className="results-text">
+        Wrong Answers: <span className="results-number">{result.wrongAnswers}</span>
       </p>
-      <p>
-        Total Score: <span>{result.score}%</span>
+      <p className="results-text">
+        Total Score: <span className="results-number">{result.score}%</span>
       </p>
-      <button onClick={onTryAgain}>Try Again</button>
-      {!showScores ? (
-        <div className="add-to-leaderboard">
-          <h3>Add to Leaderboard</h3>
-          <input placeholder="Name" id="user-name" name="user-name" value={name} onChange={(evt) => setName(evt.target.value)} />
-          <button className="btn" onClick={handleSave}>Save</button>
-        </div>
-      ) : (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Ranking</th>
-                <th>Name</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {highScores.map((highScore, i) => {
-                return (
-                  <tr key={`${highScore.score}${highScore.name}${i}`}>
-                    <td>{i + 1}</td>
-                    <td>{highScore.name}</td>
-                    <td>{highScore.score}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </>
-      )}
+      <Button className="btn basic-btn" onClick={onTryAgain} btnText="Try Again" />
+      <div className="add-to-leaderboard">
+        <h2>Add to Leaderboard</h2>
+        <input placeholder="Name" id="user-name" name="user-name" value={name} onChange={(evt) => setName(evt.target.value)} />
+        <Button className="btn basic-btn" onClick={handleSave} btnText="Save" />
+      </div>
     </div>
   );
 };

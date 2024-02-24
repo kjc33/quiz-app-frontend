@@ -36,7 +36,7 @@ function AnswerTimer({ duration, timeExpire }) {
           width: `${progressLoaded}%`,
           backgroundColor: `${
             progressLoaded < 40
-              ? "lightgreen"
+              ? "green"
               : progressLoaded < 70
               ? "orange"
               : "red"

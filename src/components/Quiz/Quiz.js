@@ -100,28 +100,28 @@ const Quiz = ({ questions }) => {
     if (!choice_1 || !choice_2 || !choice_3 || !choice_4) return null;
 
     return (
-      <ul>
+      <ul className="choice-list">
         <li onClick={() => onAnswerClick(0)} className={answerIndex === 0 ? "selected-answer" : null}>
-          {choice_1}
+          A: {choice_1}
         </li>
         <li onClick={() => onAnswerClick(1)} className={answerIndex === 1 ? "selected-answer" : null}>
-          {choice_2}
+          B: {choice_2}
         </li>
         <li onClick={() => onAnswerClick(2)} className={answerIndex === 2 ? "selected-answer" : null}>
-          {choice_3}
+          C: {choice_3}
         </li>
         <li onClick={() => onAnswerClick(3)} className={answerIndex === 3 ? "selected-answer" : null}>
-          {choice_4}
+          D: {choice_4}
         </li>
       </ul>
     );
   };
 
   return (
-    <div className="quiz">
+    <div className="exam-wrapper">
       {!showResult ? (
         <>
-          <AnswerTimer key={key} duration={5} timeExpire={handleTimeExpire} />
+          <AnswerTimer key={key} duration={30} timeExpire={handleTimeExpire} />
           <div className="pagination">
             <span className="active-question-number">{currentQuestion + 1}</span>
             <span className="total-questions">/{questions.length}</span>

@@ -1,33 +1,8 @@
 @import "../../styles/vars.scss";
 
-.result {
-    text-align: center;
+.exam {
 
-    h3 {
-        font-size: 1.5rem;
-        letter-spacing: 1.4px;
-        text-align: center;
-    }
-
-    p {
-        font-size: 1rem;
-        font-weight: 500;
-        color: $body;
-    
-       span {
-            color: $primary;
-            font-size: 1.5rem;
-        }
-    }
-
-    table {
-        width: 50%;
-        text-align: left;
-        margin: 50px auto 20px;
-        border-collapse: collapse;
-
-        tr {
-            border: 1px solid;
-        }
+    h2 {
+        padding-bottom: 20px;
     }
 }
